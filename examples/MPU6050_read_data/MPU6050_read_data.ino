@@ -32,7 +32,7 @@ void setup() {
  
   /*
     Prescaler sensitivity table
-  +=======+========+=============+
+  +=======+=======+==============+
   | Value |  Acl  |     Gyro     |
   +=======+=======+==============+
   |   0   |  ±2g  |  ±250 deg/s  |
@@ -44,7 +44,7 @@ void setup() {
   |   3   | ±16g  |  ±2000 deg/s |
   +=======+=======+==============+
   */
-  
+
   mpu.calibrate(500);     // Calibrating offsets for the MPU6050, do not move the sensor during this time
   delay(100);
 }
