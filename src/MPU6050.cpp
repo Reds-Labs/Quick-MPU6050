@@ -33,7 +33,7 @@ bool MPU6050::begin() {
 	status = I2Cread(MPU_ADDR, data, 1);
 
 	data[0]=PWR_MGMT_1;
-	data[1]=0x00;
+	data[1]=DEFAULT_POWER_SETTINGS;
 	I2Cwrite(MPU_ADDR, data, 2);
 
 	data[0]=CONFIG;
@@ -54,7 +54,7 @@ bool MPU6050::begin() {
 	return status;
 }
 
-void MPU6050::setSettings(uint8_t powerMode, uint8_t mpuConfig, uint8_t gyroSmplRt) {
+void MPU6050::setSettings(uint8_t powerMode, uint8_t mpuConf, uint8_t gyroSmplRt) {
 	uint8_t data[2];
 	
 	data[0]=PWR_MGMT_1;
