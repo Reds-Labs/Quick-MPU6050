@@ -68,14 +68,6 @@ void MPU6050::setSettings(uint8_t powerMode, uint8_t mpuConf, uint8_t gyroSmplRt
 	data[0]=SMPRT_DIV;
 	data[1]=gyroSmplRt;
 	I2Cwrite(MPU_ADDR, data, 2);
-
-	data[0]=GYRO_CONFIG;
-	data[1]=0x00;
-	I2Cwrite(MPU_ADDR, data, 2);
-
-	data[0]=ACCEL_CONFIG;
-	data[1]=0x00;
-	I2Cwrite(MPU_ADDR, data, 2);
 }
 
 void MPU6050::setPrescaler(uint8_t aclPrescaler, uint8_t gyroPrescaler) {
