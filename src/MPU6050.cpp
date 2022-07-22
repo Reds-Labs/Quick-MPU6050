@@ -62,19 +62,11 @@ void MPU6050::setSettings(uint8_t powerMode, uint8_t mpuConf, uint8_t gyroSmplRt
 	I2Cwrite(MPU_ADDR, data, 2);
 
 	data[0]=CONFIG;
-	data[1]=mpuConfig;
+	data[1]=mpuConf;
 	I2Cwrite(MPU_ADDR, data, 2);
 
 	data[0]=SMPRT_DIV;
 	data[1]=gyroSmplRt;
-	I2Cwrite(MPU_ADDR, data, 2);
-
-	data[0]=GYRO_CONFIG;
-	data[1]=0x00;
-	I2Cwrite(MPU_ADDR, data, 2);
-
-	data[0]=ACCEL_CONFIG;
-	data[1]=0x00;
 	I2Cwrite(MPU_ADDR, data, 2);
 }
 
@@ -88,7 +80,7 @@ void MPU6050::setPrescaler(uint8_t aclPrescaler, uint8_t gyroPrescaler) {
 	data[1]=aclPrescaler<<3;
 	I2Cwrite(MPU_ADDR, data, 2);
 
-	//aclScale = (float)(CONVERSION_CONSTANT_ACL>>aclPrescaler);
+	aclScale = (float)(CONVERSION_CONSTANT_ACL>>aclPrescaler);
 	switch(gyroPrescaler) {
 		case 0:
 			gyroScale = 131.0;
@@ -137,11 +129,11 @@ void MPU6050::calibrate(uint8_t samples) {
 
 		newOffset[0] += data[0];
 		newOffset[1] += data[1];
-		newOffset[2] += data[2]-1.0;
+		newOffset[2] += data[2]-1;
 		newOffset[3] += data[3];
 		newOffset[4] += data[4];
 		newOffset[5] += data[5];
-		delay(2);
+		delay(5);
 	}
 
 	offsets[0] = newOffset[0]/(float)samples;
